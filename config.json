@@ -1,0 +1,20 @@
+{
+    "train_file": "dev.csv",
+    "validation_file": "oos.csv",
+    "test_file": "oot.csv",
+    "target_column": "Class",
+    "autoencoder": {
+        "ratios": [0.8, 0.6, 0.4],
+        "epochs": 50,
+        "batch_size": 32,
+        "dropout": 0.1,
+        "hidden activation": "selu",
+        "optimizer": "adam",
+        "loss": "mse"
+    },
+    "feature_selection": "SHAP",
+    "feature_threshold": 0.1,
+    "model_threshold": 0.1,
+    "model": "LogisticRegression",
+    "cross_validation": 5
+}
