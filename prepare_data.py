@@ -22,7 +22,6 @@ def split_data(dev, oos):
     oos_NF = oos[oos['Class'] == 0].drop(columns=['Class'])
     return dev_F, dev_NF, oos_F, oos_NF
 
-def encode_data(model, data):
-    encoder = Sequential(model.layers[:4])  # Extract encoder part
+def encode_data(encoder, data):
     encoded_data = encoder.predict(data)
     return encoded_data
