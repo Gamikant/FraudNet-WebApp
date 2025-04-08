@@ -1,30 +1,29 @@
 {
-    "train_file": "input_data/dev.csv",
+    "train_file": "input data/dev.csv",
     "validation_file": "input data/oos.csv",
-    "test_file": "input_data/oot.csv",
+    "test_file": "input data/oot.csv",
     "target_column": "Class",
-    "train_on": "normal",
-    "tuning": "True",
+    "train_on": ["normal", "abnormal"],
     "autoencoder": 
     {
-        "ratios": [0.8, 0.6, 0.4],
-        "epochs": 50,
-        "batch_size": 32,
-        "dropout": 0.1,
-        "hidden_activation": "selu",
-        "optimizer": "adam",
-        "loss": "mse"
+        "ratios": [[0.8, 0.5, 0.2], [0.81, 0.49, 0.22]],
+        "epochs": [10, 20],
+        "batch_size": [32, 64],
+        "dropout": [0.1, 0.2],
+        "hidden_activation": ["selu", "relu", "elu", "tanh", "gelu"],
+        "optimizer": ["adam", "sgd", "rmsprop", "adadelta", "adamax", "nadam"],
+        "loss": ["binary_crossentropy", "mse", "mae"]
     },
-    "feature_selection": "re",
-    "feature_threshold": 0.1,
-    "model_threshold": 0.1,
-    "model": "LogisticRegression",
-    "model_params":
-    {
-        "C": 0.1,
+    "feature_selection": ["fpi", "re"],
+    "feature_threshold": [0.1, 0.2],
+    "model_threshold": [0, 0.1],
+    "model": ["LogisticRegression"],
+    "model_params": {
+        "C": [0.1, 1.0],
+        "penalty": "l2",
         "solver": "lbfgs",
-        "max_iter": 1000,
-        "class_weight": "balanced"
+        "max_iter": [500, 1000],
+        "random_state": 42
     },
     "cross_validation": 5
 }

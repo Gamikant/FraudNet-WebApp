@@ -58,38 +58,28 @@ def plot_feature_importance(importance_scores, feature_names, method, prefix):
     plt.savefig(f'figures/{prefix}_{method}_importance.png')
     plt.close()
 
-def feature_selection(dev_F, dev_NF, oos_F, oos_NF, method, n_features, feature_names, feature_threshold, ratios=[0.8,0.5,0.2], activation='relu', dropout=0.1, optimizer='adam', loss='mse', epochs=10, batch_size=32):
+def feature_selection(dev_F, dev_NF, oos_F, oos_NF, feature_names, method, feature_threshold, ratios=[0.8,0.5,0.2], hidden_activation='relu', dropout=0.1, optimizer='adam', loss='mse', epochs=10, batch_size=32):
     # Train on fraud examples
-    autoencoder_F = build_autoencoder(dev_F.shape[1], n_features, ratios, activation, dropout, optimizer, loss)
+    autoencoder_F = build_autoencoder(dev_F.shape[1], ratios, hidden_activation, dropout, optimizer, loss)
     autoencoder_F, _ = train_autoencoder(dev_F, oos_F, autoencoder_F, epochs, batch_size)
-    autoencoder_NF = build_autoencoder(dev_NF.shape[1], n_features, ratios, activation, dropout, optimizer, loss)
+    autoencoder_NF = build_autoencoder(dev_NF.shape[1], ratios, hidden_activation, dropout, optimizer, loss)
     autoencoder_NF, _= train_autoencoder(dev_NF, oos_NF, autoencoder_NF, epochs, batch_size)
     
     # Get importance scores using both methods
-    if method == 're':
-        importance_F_re = get_feature_importance(autoencoder_F, dev_F, method)
-        importance_NF_re = get_feature_importance(autoencoder_NF, dev_NF, method)
-    elif method == 'fpi':
-        importance_F_fpi = get_feature_importance(autoencoder_F, dev_F, method)
-        importance_NF_fpi = get_feature_importance(autoencoder_NF, dev_NF, method)
+    importance_F = get_feature_importance(autoencoder_F, dev_F, method)
+    importance_NF = get_feature_importance(autoencoder_NF, dev_NF, method)
     
     # Save importance scores and plots for fraud
-    if method == 're':
-        save_feature_importance(importance_F_re, feature_names, method, 'abnormal')
-        save_feature_importance(importance_NF_re, feature_names, method, 'normal')
-        plot_feature_importance(importance_F_re, feature_names, method, 'abnormal')
-        plot_feature_importance(importance_NF_re, feature_names, method, 'normal')
-    elif method == 'fpi':
-        save_feature_importance(importance_F_fpi, feature_names, method, 'abnormal')
-        save_feature_importance(importance_NF_fpi, feature_names, method, 'normal')
-        plot_feature_importance(importance_F_fpi, feature_names, method, 'abnormal')
-        plot_feature_importance(importance_NF_fpi, feature_names, method, 'normal')
+    save_feature_importance(importance_F, feature_names, method, 'abnormal')
+    save_feature_importance(importance_NF, feature_names, method, 'normal')
+    plot_feature_importance(importance_F, feature_names, method, 'abnormal')
+    plot_feature_importance(importance_NF, feature_names, method, 'normal')
     
     # Use reconstruction error method for feature selection
-    if method == 're':
-        features_to_drop = determine_features_to_drop(importance_F_re, importance_NF_re, feature_threshold)
-    elif method == 'fpi':
-        features_to_drop = determine_features_to_drop(importance_F_fpi, importance_NF_fpi, feature_threshold)
+    features_to_drop = determine_features_to_drop(importance_F, importance_NF, feature_threshold)
+    
+    # Convert numeric indices to feature names before returning
+    features_to_drop = [feature_names[idx] for idx in features_to_drop]
     return features_to_drop
 
 def determine_features_to_drop(importance_F, importance_NF, feature_threshold=0.1):
@@ -99,5 +89,6 @@ def determine_features_to_drop(importance_F, importance_NF, feature_threshold=0.
     return features_to_drop
 
 def drop_features(data, features_to_drop, all_features):
-    data = pd.DataFrame(data, columns = all_features)
+    # Now features_to_drop contains column names, so we can use them directly
+    data = pd.DataFrame(data, columns=all_features)
     return data.drop(columns=features_to_drop)

@@ -1,12 +1,13 @@
-train_file,validation_file,test_file,target_column,train_on,tuning,autoencoder,feature_selection,feature_threshold,model_threshold,model,model_params,cross_validation
-input data/dev.csv,input data/oos.csv,input data/oot.csv,Class,normal,False,"[0.8, 0.5, 0.2]",fpi,0.1,0,LogisticRegression,,5
-input data/dev.csv,input data/oos.csv,input data/oot.csv,Class,normal,False,2,fpi,0.1,0,LogisticRegression,,5
-input data/dev.csv,input data/oos.csv,input data/oot.csv,Class,normal,False,32,fpi,0.1,0,LogisticRegression,,5
-input data/dev.csv,input data/oos.csv,input data/oot.csv,Class,normal,False,0.1,fpi,0.1,0,LogisticRegression,,5
-input data/dev.csv,input data/oos.csv,input data/oot.csv,Class,normal,False,selu,fpi,0.1,0,LogisticRegression,,5
-input data/dev.csv,input data/oos.csv,input data/oot.csv,Class,normal,False,adam,fpi,0.1,0,LogisticRegression,,5
-input data/dev.csv,input data/oos.csv,input data/oot.csv,Class,normal,False,mse,fpi,0.1,0,LogisticRegression,,5
-input data/dev.csv,input data/oos.csv,input data/oot.csv,Class,normal,False,,fpi,0.1,0,LogisticRegression,0.1,5
-input data/dev.csv,input data/oos.csv,input data/oot.csv,Class,normal,False,,fpi,0.1,0,LogisticRegression,lbfgs,5
-input data/dev.csv,input data/oos.csv,input data/oot.csv,Class,normal,False,,fpi,0.1,0,LogisticRegression,1000,5
-input data/dev.csv,input data/oos.csv,input data/oot.csv,Class,normal,False,,fpi,0.1,0,LogisticRegression,balanced,5
+train_file,validation_file,test_file,target_column,train_on,tuning,feature_selection,feature_threshold,model_threshold,model,cross_validation,autoencoder,model_params
+input data/dev.csv,input data/oos.csv,input data/oot.csv,Class,normal,False,re,0.1,0.5,LogisticRegression,5,"[0.8, 0.5, 0.2]",
+input data/dev.csv,input data/oos.csv,input data/oot.csv,Class,normal,False,re,0.1,0.5,LogisticRegression,5,10,
+input data/dev.csv,input data/oos.csv,input data/oot.csv,Class,normal,False,re,0.1,0.5,LogisticRegression,5,32,
+input data/dev.csv,input data/oos.csv,input data/oot.csv,Class,normal,False,re,0.1,0.5,LogisticRegression,5,0.1,
+input data/dev.csv,input data/oos.csv,input data/oot.csv,Class,normal,False,re,0.1,0.5,LogisticRegression,5,selu,
+input data/dev.csv,input data/oos.csv,input data/oot.csv,Class,normal,False,re,0.1,0.5,LogisticRegression,5,adam,
+input data/dev.csv,input data/oos.csv,input data/oot.csv,Class,normal,False,re,0.1,0.5,LogisticRegression,5,mse,
+input data/dev.csv,input data/oos.csv,input data/oot.csv,Class,normal,False,re,0.1,0.5,LogisticRegression,5,,1.0
+input data/dev.csv,input data/oos.csv,input data/oot.csv,Class,normal,False,re,0.1,0.5,LogisticRegression,5,,l2
+input data/dev.csv,input data/oos.csv,input data/oot.csv,Class,normal,False,re,0.1,0.5,LogisticRegression,5,,lbfgs
+input data/dev.csv,input data/oos.csv,input data/oot.csv,Class,normal,False,re,0.1,0.5,LogisticRegression,5,,200
+input data/dev.csv,input data/oos.csv,input data/oot.csv,Class,normal,False,re,0.1,0.5,LogisticRegression,5,,42
