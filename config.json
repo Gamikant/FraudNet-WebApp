@@ -10,9 +10,9 @@
         "epochs": [10, 20],
         "batch_size": [32, 64],
         "dropout": [0.1, 0.2],
-        "hidden_activation": ["selu", "relu", "elu", "tanh", "gelu"],
-        "optimizer": ["adam", "sgd", "rmsprop", "adadelta", "adamax", "nadam"],
-        "loss": ["binary_crossentropy", "mse", "mae"]
+        "hidden_activation": ["selu", "relu", "elu", "gelu"],
+        "optimizer": ["adam", "nadam"],
+        "loss": ["mse"]
     },
     "feature_selection": ["fpi", "re"],
     "feature_threshold": [0.1, 0.2],

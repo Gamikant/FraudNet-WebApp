@@ -64,8 +64,7 @@ def train_model(X_train, y_train, X_test, y_test, model_type, params, threshold)
     confusion_mat = confusion_matrix(y_test, y_pred)
     return model, f1, precision, recall, confusion_mat
 
-def save_results(log_file, best_params, encoded_dev, encoded_oos, encoded_oot, autoencoder_model, encoder_model, logistic_model):
-    pd.DataFrame(log_file).to_csv('pipeline_log.csv', index=False)
+def save_results(best_params, encoded_dev, encoded_oos, encoded_oot, autoencoder_model, encoder_model, logistic_model):
     with open('saved best models/best_params.txt', 'w') as f:
         f.write(str(best_params))
     pd.DataFrame(encoded_dev).to_csv('encoded data/encoded_dev.csv', index=False)
