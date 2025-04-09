@@ -1,0 +1,9 @@
+2025-04-09 15:15:45 - INFO - Running in tuning mode
+2025-04-09 15:15:45 - INFO - Starting hyperparameter tuning process
+2025-04-09 15:15:45 - INFO - Initial parameters: {'train_file': 'input data/dev.csv', 'validation_file': 'input data/oos.csv', 'test_file': 'input data/oot.csv', 'target_column': 'Class', 'drop_features': 'yes', 'train_on': 'normal', 'tuning': True, 'feature_selection': 'fpi', 'feature_threshold': 0.1, 'model_threshold': 0.5, 'model': 'LogisticRegression', 'cross_validation': 5, 'autoencoder': {'ratios': [0.8, 0.5, 0.2], 'epochs': 10, 'batch_size': 32, 'dropout': 0.1, 'hidden_activation': 'selu', 'optimizer': 'adam', 'loss': 'mse'}, 'model_params': {'C': 1.0, 'penalty': 'l2', 'solver': 'lbfgs', 'max_iter': 200, 'random_state': 42}}
+2025-04-09 15:15:45 - INFO - Running initial feature selection using default parameters
+2025-04-09 15:18:02 - INFO - Starting autoencoder tuning - Stage 1
+2025-04-09 15:18:02 - INFO - Testing 128 autoencoder parameter combinations
+2025-04-09 15:18:54 - INFO - New best F1 score: 0.032 with parameters: {'ratios': [0.8, 0.5, 0.2], 'epochs': 10, 'batch_size': 32, 'dropout': 0.1, 'hidden_activation': 'selu', 'optimizer': 'adam', 'loss': 'mse'}
+2025-04-09 15:19:47 - INFO - New best F1 score: 0.07692307692307693 with parameters: {'ratios': [0.8, 0.5, 0.2], 'epochs': 10, 'batch_size': 32, 'dropout': 0.1, 'hidden_activation': 'selu', 'optimizer': 'nadam', 'loss': 'mse'}
+2025-04-09 15:20:37 - INFO - New best F1 score: 0.6161616161616161 with parameters: {'ratios': [0.8, 0.5, 0.2], 'epochs': 10, 'batch_size': 32, 'dropout': 0.1, 'hidden_activation': 'relu', 'optimizer': 'adam', 'loss': 'mse'}
